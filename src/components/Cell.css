@@ -1,0 +1,22 @@
+.cell {
+  border: 1px solid black;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 300px;
+  height: 300px;
+  font-size: 50px;
+}
+
+.cell:hover {
+  cursor: pointer;
+  user-select: none;
+}
+
+.cell-player-1:hover {
+  border-color: cyan;
+}
+
+.cell-player-2:hover {
+  border-color: darkorchid;
+}

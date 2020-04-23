@@ -1,0 +1,50 @@
+.game {
+  display: grid;
+  grid-template-areas:
+    "info error"
+    "grid reset"
+    "grid .";
+  grid-template-rows: min-content min-content 1fr;
+  grid-template-columns: 1fr min-content;
+}
+
+.info {
+  grid-area: info;
+}
+
+.error {
+  grid-area: error;
+}
+
+.reset {
+  grid-area: reset;
+  height: 50px;
+  width: 100px;
+  background-color: dimgray;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.reset:hover {
+  cursor: pointer;
+  background-color: darkslategray;
+  user-select: none;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-rows: 1fr 1fr 1fr;
+  width: 900px;
+  height: 900px;
+}
+
+.current-player-text {
+  font-size: 50px;
+}
+
+.error-text {
+  color: red;
+  font-size: 30px;
+}
