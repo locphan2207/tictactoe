@@ -5,7 +5,26 @@ import "./Game.css"
 
 import Cell from "components/Cell"
 
-function Game({ game }) {
+function Game({ game, onlinePlayer, onlinePlay }) {
+  let playerText = `Current turn: Player ${game.currentPlayer}`
+
+  let winnerText = `WINNER: ${
+    game.winner === 0 ? "Draw" : game.winner === 1 ? "Player 1" : "Player 2"
+  }!!!`
+
+  if (onlinePlayer) {
+    playerText = `Current turn: ${
+      onlinePlayer === game.currentPlayer ? "You" : "Your opponent"
+    }`
+    winnerText = `WINNER: ${
+      game.winner === 0
+        ? "Draw"
+        : game.winner === onlinePlayer
+        ? "You"
+        : "your opponent"
+    }!!!`
+  }
+
   return (
     <div className="game">
       <div className="info">
@@ -13,7 +32,9 @@ function Game({ game }) {
           <p
             className="current-player-text"
             style={{ color: game.currentPlayer === 1 ? "cyan" : "darkorchid" }}
-          >{`Current turn: Player ${game.currentPlayer}`}</p>
+          >
+            {playerText}
+          </p>
         )}
         {game.winner !== null && (
           <p
@@ -26,7 +47,9 @@ function Game({ game }) {
                   ? "darkorchid"
                   : "black",
             }}
-          >{`WINNER: ${game.getWinner()}`}</p>
+          >
+            {winnerText}
+          </p>
         )}
       </div>
       <div className="reset" onClick={game.startOver.bind(game)}>
@@ -39,7 +62,15 @@ function Game({ game }) {
         {[0, 1, 2].map((x) =>
           [0, 1, 2].map((y) => {
             const cellName = `${x}-${y}`
-            return <Cell key={cellName} x={x} y={y} />
+            return (
+              <Cell
+                key={cellName}
+                x={x}
+                y={y}
+                onlinePlay={onlinePlay}
+                onlinePlayer={onlinePlayer}
+              />
+            )
           })
         )}
       </div>

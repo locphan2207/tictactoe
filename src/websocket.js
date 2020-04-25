@@ -4,14 +4,8 @@ export function createSocket() {
   )
 }
 
-export function initSocket(socket) {
-  socket.addEventListener("open", () => {
-    console.log("connected")
-  })
-  socket.addEventListener("message", (data) =>
-    console.log(`From server:`, data.data)
-  )
-  socket.addEventListener("close", () => {
-    console.log("disconnected")
-  })
+export function initSocket(socket, { onOpen, onClose, onMessage }) {
+  socket.addEventListener("open", onOpen)
+  socket.addEventListener("message", onMessage)
+  socket.addEventListener("close", onClose)
 }

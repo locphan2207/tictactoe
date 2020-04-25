@@ -25,30 +25,27 @@ class GameState {
     return this.board[x][y]
   }
 
-  getWinner() {
-    return this.winner === NONE_PLAYER ? "Draw" : `Player ${this.winner}!!!`
-  }
-
   subscribeComponent(component) {
     this.subscribedComponents.push(component)
   }
 
-  playTurn(x, y) {
+  playTurn(x, y, player) {
     // Return 1 or 2 means player 1 or 2 wins
     // Return 0 means noone has won, but the play was legit
     // Return -1 means the play was not allowed
+    if (player !== this.currentPlayer) return
+
     if (this.winner) return
     if (!this.board[x][y]) {
       this.error = ""
-      this.board[x][y] = this.currentPlayer
+      this.board[x][y] = player
 
-      if (this.checkWin(x, y, this.currentPlayer)) {
-        this.winner = this.currentPlayer
+      if (this.checkWin(x, y, player)) {
+        this.winner = player
       } else if (this.isOver()) {
         this.winner = NONE_PLAYER
       } else {
-        this.currentPlayer =
-          this.currentPlayer === PLAYER_1 ? PLAYER_2 : PLAYER_1
+        this.currentPlayer = player === PLAYER_1 ? PLAYER_2 : PLAYER_1
       }
     } else {
       this.error = "Not a correct play"
