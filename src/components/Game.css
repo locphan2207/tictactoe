@@ -36,8 +36,8 @@
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
   grid-template-rows: 1fr 1fr 1fr;
-  width: 900px;
-  height: 900px;
+  width: 750;
+  height: 750;
 }
 
 .current-player-text {
