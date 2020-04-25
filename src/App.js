@@ -18,6 +18,8 @@ function App() {
       </Route>
       <Route path="/online">
         <Online />
+      </Route>
+      <Route path="/online/:room">
         <Game />
       </Route>
     </Router>

@@ -1,4 +1,7 @@
 import React, { useEffect, useState, useRef } from "react"
+import { useHistory } from "react-router-dom"
+
+import "./Online.css"
 
 import { createSocket, initSocket } from "websocket"
 
@@ -6,6 +9,8 @@ function Online() {
   const [room, setRoom] = useState("")
   const [isInRoom, setIsInRoom] = useState(false)
   const socket = useRef(null)
+
+  const history = useHistory()
 
   useEffect(() => {
     socket.current = createSocket()
@@ -21,12 +26,14 @@ function Online() {
     socket.current.send(
       JSON.stringify({ action: "createRoom", roomName: room })
     )
+    history.push(`/online/${room}`)
   }
 
   const exitRoom = () => {
     setIsInRoom(false)
     setRoom("")
     socket.current.send(JSON.stringify({ action: "exitRoom" }))
+    history.push(`/online`)
   }
 
   const handleInputChange = ({ target }) => {
@@ -44,16 +51,12 @@ function Online() {
   }
 
   return (
-    <div>
+    <div className="online">
       {!isInRoom && (
         <>
-          <label>Create new room / Join a room</label>
-          <input
-            type="text"
-            onChange={handleInputChange}
-            placeholder="Enter new room name or the room name you want to join"
-          />
-          <button onClick={createRoom}>Create / Join</button>
+          <label>Enter a room name to create or join</label>
+          <input type="text" onChange={handleInputChange} />
+          <button onClick={createRoom}>Submit</button>
         </>
       )}
       {!!isInRoom && (
@@ -63,7 +66,6 @@ function Online() {
           <button onClick={exitRoom}>Exit room</button>
         </>
       )}
-      <button onClick={testSend}>SEND FOR TESTING</button>
     </div>
   )
 }
