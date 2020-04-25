@@ -5,6 +5,7 @@ import "./App.css"
 
 import Menu from "./components/Menu"
 import Game from "./components/Game"
+import Online from "./components/Online"
 
 function App() {
   return (
@@ -13,6 +14,10 @@ function App() {
         <Menu />
       </Route>
       <Route path="/offline">
+        <Game />
+      </Route>
+      <Route path="/online">
+        <Online />
         <Game />
       </Route>
     </Router>
