@@ -35,7 +35,11 @@ function Online() {
 
   const testSend = () => {
     socket.current.send(
-      JSON.stringify({ action: "sendGameState", message: "HELLO" })
+      JSON.stringify({
+        action: "sendGameState",
+        message: "HELLO",
+        roomName: room,
+      })
     )
   }
 
